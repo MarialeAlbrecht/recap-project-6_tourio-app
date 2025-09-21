@@ -9,11 +9,22 @@ export default function EditPage() {
   const { id } = router.query;
   const { data: place, isLoading, error } = useSWR(`/api/places/${id}`);
 
-  async function editPlace(place) {
-    console.log("Editing place ...");
-  }
+  // if (!isReady || isLoading || error) return <h2>Loading...</h2>;
 
-  if (!isReady || isLoading || error) return <h2>Loading...</h2>;
+  async function editPlace(place) {
+    console.log("Editing place ...", place);
+
+    const response = await fetch(`/api/places/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(place),
+    });
+    if (response.ok) {
+      router.push("/");
+    }
+  }
 
   return (
     <>
