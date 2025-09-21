@@ -9,6 +9,8 @@ export default function EditPage() {
   const { id } = router.query;
   const { data: place, isLoading, error } = useSWR(`/api/places/${id}`);
 
+  // if (!isReady || isLoading || error) return <h2>Loading...</h2>;
+
   async function editPlace(place) {
     console.log("Editing place ...", place);
 
@@ -23,8 +25,6 @@ export default function EditPage() {
       router.push("/");
     }
   }
-
-  if (!isReady || isLoading || error) return <h2>Loading...</h2>;
 
   return (
     <>

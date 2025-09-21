@@ -25,8 +25,8 @@ export default async function handler(request, response) {
     }
 
     if (request.method === "DELETE") {
-      const deletedPlace = await Place.findByIdAndDelete(id);
-      response.status(200).jsone({ message: "Place deleted" });
+      const result = await Place.findByIdAndDelete(id);
+      response.status(200).json({ message: "Place deleted" });
       return;
     }
   } catch (error) {
